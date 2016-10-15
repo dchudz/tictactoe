@@ -1,10 +1,10 @@
 from flask import Flask, request
-from tic import Board, BadBoard, best_move_with_outcome, O
+from tic import Board, GameError, best_move_with_outcome, O
 
 app = Flask(__name__)
 ME = O
 
-@app.errorhandler(BadBoard)
+@app.errorhandler(GameError)
 def bad_board(e):
     return str(e), 400
 

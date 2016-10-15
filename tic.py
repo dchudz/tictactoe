@@ -3,7 +3,20 @@ X = 'x'
 BLANK = ' '
 SIDE_SIZE = 3
 
-class BadBoard(Exception):
+
+class GameError(Exception):
+    pass
+
+
+class BadBoard(GameError):
+    pass
+
+
+class GameOver(GameError):
+    pass
+
+
+class NotMyTurn(GameError):
     pass
 
 
@@ -87,7 +100,12 @@ class Board:
 
 def best_move_with_outcome(board, player):
     if board.winner:
-        raise BadBoard('{} already won!'.format(board.winner))
+        raise GameOver('{} already won!'.format(board.winner))
+    if player == O and board.num_os > board.num_xs:
+        raise NotMyTurn('not my turn')
+    if player == X and board.num_xs > board.num_os:
+        raise NotMyTurn('not my turn')
+
     moves = board.possible_moves(player)
     winning_moves = [move for move in moves if move.winner == player]
     if winning_moves:
