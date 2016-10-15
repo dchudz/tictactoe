@@ -1,20 +1,13 @@
 from flask import Flask, request
+from tic import Board, BadBoard
 
 app = Flask(__name__)
 
-
-class BadBoard(Exception):
-    pass
 
 @app.errorhandler(BadBoard)
 def bad_board(e):
     return str(e), 400
 
-
-class Board:
-    def __init__(self, board_string):
-        pass
-    pass
 
 @app.route('/')
 def index():
@@ -23,7 +16,9 @@ def index():
     except KeyError:
         return 'please provide a board in the "board" query parameter', 400
 
-    return 'hey there'
+    board = Board(board_string)
+    return 'hi'
+
 
 
 if __name__ == '__main__':
