@@ -38,11 +38,13 @@ def player_has_won(board, player):
             return True
     if all(board[i, i] == player for i in range(SIDE_SIZE)):
         return True
-    if all(board[i, SIDE_SIZE-i] == player for i in range(SIDE_SIZE)):
+    if all(board[i, SIDE_SIZE-i-1] == player for i in range(SIDE_SIZE)):
         return True
 
 
 def _get_index(row, col):
+    assert 0 <= row < SIDE_SIZE
+    assert 0 <= col < SIDE_SIZE
     return SIDE_SIZE*row + col
 
 
