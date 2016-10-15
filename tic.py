@@ -47,6 +47,9 @@ def _get_index(row, col):
 
 
 class Board:
+    """
+    Represents a board. Can only represent a valid board (board that arises in the game of tic tac toe).
+    """
     def __init__(self, board_string):
         if len(board_string) != SIDE_SIZE**2:
             raise BadBoard('board string is the wrong size')
@@ -99,6 +102,18 @@ class Board:
 
 
 def best_move_with_outcome(board, player):
+    """
+    :param board: Board
+    :param player: str (a player)
+    :return: tuple with best move and winner (None if no winner)
+    """
+    # It would be better to memoize and safe computation.
+    # Even better would be to build up a dictionary of boards and best responses (when the app starts, or outside the
+    # app.
+
+    if board.string == '         ':
+        # a good move for beating humans and saves computation at game start
+        return Board('    ' + player + '    '), None
     if board.winner:
         raise GameOver('{} already won!'.format(board.winner))
     if player == O and board.num_os > board.num_xs:
