@@ -81,6 +81,9 @@ class Board:
     def __repr__(self):
         return self.string
 
+    def __eq__(self, other):
+        return isinstance(other, Board) and other.string == self.string
+
 
 def best_move_with_outcome(board, player):
     if board.winner:

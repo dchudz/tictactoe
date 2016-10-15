@@ -1,8 +1,8 @@
 from flask import Flask, request
-from tic import Board, BadBoard
+from tic import Board, BadBoard, best_move_with_outcome, O
 
 app = Flask(__name__)
-
+ME = O
 
 @app.errorhandler(BadBoard)
 def bad_board(e):
@@ -17,8 +17,7 @@ def index():
         return 'please provide a board in the "board" query parameter', 400
 
     board = Board(board_string)
-    return 'hi'
-
+    return best_move_with_outcome(board, ME)
 
 
 if __name__ == '__main__':
