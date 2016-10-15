@@ -17,7 +17,7 @@ def index():
         return 'please provide a board in the "board" query parameter', 400
 
     board = Board(board_string)
-    return best_move_with_outcome(board, ME)
+    return best_move_with_outcome(board, ME)[0].string
 
 
 if __name__ == '__main__':

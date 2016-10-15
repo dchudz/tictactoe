@@ -47,13 +47,13 @@ def test_cant_be_my_turn():
     with pytest.raises(NotMyTurn):
         best_move_with_outcome(board, 'o')
 
-#
-# class TestApp(TestCase):
-#     def create_app(self):
-#         app.config['TESTING'] = True
-#         return app
-#
-#     def test_something(self):
-#         response = self.client.get("/", query_string={'board': 'oo xx    '})
-#         assert response.status_code == 200
-#         assert response.content == 'oooxx    '
+
+class TestApp(TestCase):
+    def create_app(self):
+        app.config['TESTING'] = True
+        return app
+
+    def test_something(self):
+        response = self.client.get("/", query_string={'board': 'oo xx    '})
+        assert response.status_code == 200
+        assert response.data.decode() == 'oooxx    '
